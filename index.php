@@ -261,7 +261,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Label & Barcode Printing</title>
+        <title>Label & Barcode Printing with Color Marq</title>
         <link rel="stylesheet" href="{$SWB}css/bootstrap.min.css">
         <style>
             @media print {
