@@ -191,7 +191,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
 
         
         $bg = $colors[$first] ?? '#FFFFFF'; // Default putih jika bukan angka
-        return "background-color: $bg; color: #FFF; border: 1px solid #000; text-align: center; padding: 2px;";
+        return "background-color: $bg; color: #FFF; border: 1px solid #000; text-align: center; padding: 5px;";
     }
 
     // chunk label array
@@ -216,7 +216,13 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
             $html_str .= '<td valign="top">';
             $html_str .= '<div class="card card-body border-dark mb-3"><div class="d-flex align-items-center">';
             $html_str .= '<div style="width:240px; margin-right: 40px;position:relative;">';
-            $html_str .= '<div style="padding:0 1rem;font-size:10pt;text-align:center;position:absolute;top:-1px;left:0;right:0;z-index:1;background:white;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;line-height:1.25">'.$labels[2].'</div>';
+            $html_str .= '<div style="text-align:center;margin-bottom:5px;">';
+            // Atur Bagian Logo Disini
+            $html_str .= '<img src="../plugins/label_barcode_marq/logo.png" style="max-height: 100px;width: 141px;margin-bottom: 0px;padding-bottom: 10px;" alt="Logo" />';
+            $html_str .= '</div>';
+            // Atur Bagian Barcode Disini
+            $html_str .= '<div style="padding:0 1rem;font-size:10pt;text-align:center;position:absolute;top:38px;left:0;right:0;z-index:1;background:white;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;line-height:1.25">'.$labels[2].'</div>';
+
             $html_str .= '<img class="img-fluid" src="' . SWB . IMG . '/barcodes/' . urlencode(urlencode($barcode_text)) . '.png?' . date('YmdHis') . '" border="0" />';
             $html_str .= '</div>';
             $html_str .= '<div>';
@@ -261,7 +267,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Label & Barcode Printing with Color Marq</title>
+        <title>Label & Barcode Printing</title>
         <link rel="stylesheet" href="{$SWB}css/bootstrap.min.css">
         <style>
             @media print {
