@@ -2,7 +2,7 @@
 **Untuk SLiMS 9 Keatas dengan sistem plugin**
 ## Deskripsi
 
-**Label Barcode Marq** adalah plugin untuk manajemen label barcode di perpustakaan dengan tambahan sistem **Color Marq** yang inovatif. Teknologi ColorMarq membawa visualisasi urutan klasifikasi perpustakaan ke rak buku, memungkinkan pengelolaan koleksi perpustakaan yang lebih efisien dan cepat.
+**Label Barcode Marq** adalah plugin untuk manajemen label barcode di perpustakaan dengan tambahan sistem **Color Marq** http://colormarq.com/ yang inovatif. Teknologi ColorMarq membawa visualisasi urutan klasifikasi perpustakaan ke rak buku, memungkinkan pengelolaan koleksi perpustakaan yang lebih efisien dan cepat. 
 
 ColorMarq bekerja dengan sistem yang disesuaikan untuk memaksimalkan ketersediaan koleksi perpustakaan. Manfaat instan dari plugin ini akan memberdayakan staf perpustakaan untuk mengelola koleksi lebih efisien, menghemat waktu berharga, serta mempertahankan sirkulasi yang optimal. Dengan sistem ini, buku yang salah tempat akan dengan mudah ditemukan dan dikembalikan ke rak yang tepat.
 
