@@ -173,26 +173,24 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
     loadPrintSettings($dbs, 'label');
 
     // Fungsi pembantu untuk menentukan inline style berdasarkan karakter pertama pada baris
-    function getInlineStyle($line) {
-        $first = substr(trim($line), 0, 1);
-        // Warna berbeda untuk setiap angka 0-9
-        $colors = [
-            '0' => '#000000', // Hitam
-            '1' => '#f01615', // Merah
-            '2' => '#00adf2', // Biru
-            '3' => '#00a74d', // Hijau
-            '4' => '#feb131', // Kuning
-            '5' => '#2e2d95', // Biru Tua
-            '6' => '#800080', // Ungu Tua
-            '7' => '#008080', // Biru Kehijauan
-            '8' => '#A52A2A', // Coklat Tua
-            '9' => '#FF1493'  // Merah Muda
-        ];
+function getInlineStyle($line) {
+    $first = substr(trim($line), 0, 1);
+    $colors = [
+        '0' => '#000000',
+        '1' => '#f01615',
+        '2' => '#00adf2',
+        '3' => '#00a74d',
+        '4' => '#feb131',
+        '5' => '#2e2d95',
+        '6' => '#800080',
+        '7' => '#008080',
+        '8' => '#A52A2A',
+        '9' => '#FF1493'
+    ];
+    $bg = $colors[$first] ?? '#FFFFFF';
+    return "background-color: $bg; color: #FFF; border: 1px solid #000; padding: 5px 10px 5px 10px;";
+}
 
-        
-        $bg = $colors[$first] ?? '#FFFFFF'; // Default putih jika bukan angka
-        return "background-color: $bg; color: #FFF; border: 1px solid #000; text-align: center; padding: 5px;";
-    }
 
     // chunk label array
     $chunked_label_arrays = array_chunk($label_data_array, 2);
@@ -229,13 +227,15 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
             if ($sysconf['print']['label']['include_header_text']) {
                 $html_str .= '<div class="labelHeaderStyle">' . ($sysconf['print']['label']['header_text'] ? $sysconf['print']['label']['header_text'] : $sysconf['library_name']) . '</div>';
             }
-            $html_str .= '<div class="labelStyle">';
-            // Baris 1: menampilkan keseluruhan call number
-            $html_str .= '<div style="' . getInlineStyle($label) . '">' . htmlspecialchars($label) . '</div>';
-            // Ekstraksi nomor klasifikasi, diasumsikan token pertama pada call number
+            $html_str .= '<div class="labelStyle" style="display: flex; flex-direction: column; align-items: center; width: 100%;">';
+
+            // Baris 1: Call Number lengkap
+            $html_str .= '<div style="' . getInlineStyle($label) . '; font-weight: bold; text-align: center; width: 100%;">' . htmlspecialchars($label) . '</div>';
+
+
+            // Ekstraksi call number
             $tokens = explode(' ', $label);
             $classification = $tokens[0];
-            // Pastikan panjang minimal untuk memecahnya sesuai aturan
             if (strlen($classification) >= 5) {
                 $line2 = substr($classification, 0, 1);
                 $line3 = substr($classification, 1, 1);
@@ -243,13 +243,17 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
                 $line5 = substr($classification, 4, 1);
                 $line6 = substr($classification, 5);
             } else {
-                // Jika format tidak sesuai, set nilai kosong
                 $line2 = $line3 = $line4 = $line5 = $line6 = '';
             }
             $lines = [$line2, $line3, $line4, $line5, $line6];
+
+            // Baris 2–6: Tambahkan padding kiri agar teks tetap rata kiri, tetapi tetap berada di tengah label
             foreach ($lines as $line) {
-                $html_str .= '<div style="' . getInlineStyle($line) . '">' . htmlspecialchars($line) . '</div>';
+                $html_str .= '<div style="' . getInlineStyle($line) . '; width: 100%; text-align: left; padding-left: 10px; font-weight: bold;">' . htmlspecialchars($line) . '</div>';
             }
+
+            $html_str .= '</div>'; // Tutup div.labelStyle
+
             $html_str .= '</div></div></div>';
             $html_str .= '</div>';
             $html_str .= '</td>';
